@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Lesson;
 
-class LessonController extends Controller
+class GroupController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +13,7 @@ class LessonController extends Controller
      */
     public function index()
     {
-        $lessons = Lesson::all();
-        return response()->json([
-            "lessons"=>$lessons
-        ]);
+        //
     }
 
     /**
@@ -27,7 +23,7 @@ class LessonController extends Controller
      */
     public function create()
     {
-        return view("lessons.create");
+        //
     }
 
     /**
@@ -38,10 +34,7 @@ class LessonController extends Controller
      */
     public function store(Request $request)
     {
-        Lesson::create($request->all());
-        return response()->json([
-            "message"=>"Lesson was created"
-        ]);
+        //
     }
 
     /**
@@ -52,7 +45,7 @@ class LessonController extends Controller
      */
     public function show($id)
     {
-        
+        //
     }
 
     /**
@@ -63,8 +56,7 @@ class LessonController extends Controller
      */
     public function edit($id)
     {
-        $lesson = Lesson::where("id",$id)->firstOrFail();
-        return view("lessons.edit")->with("lesson",$lesson);
+        //
     }
 
     /**
@@ -76,17 +68,7 @@ class LessonController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $lesson = Lesson::where("id",$id)->update([
-
-        ]);
-        if($lesson){
-            return response()->json([
-                "message"=>"lesson was saved"
-            ]);
-        }
-        return response()->json([
-            "message"=>"Updating has error"
-        ]);
+        //
     }
 
     /**
@@ -97,7 +79,6 @@ class LessonController extends Controller
      */
     public function destroy($id)
     {
-        Lesson::where("id",$id)->delete();
-        return true;
+        //
     }
 }

@@ -15,6 +15,8 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
+            $table->text("name");
+            $table->foreignId("group_id")->references("groups")->onDelete("cascade");
             $table->timestamps();
         });
     }

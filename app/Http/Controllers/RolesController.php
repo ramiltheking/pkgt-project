@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Student;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Student;
 
-class StudentController extends Controller
+class RolesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,10 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::where("id","=",0)->paginate(30);
-        return view("students.list")->with("sutdents",$students);
+        $roles = Roles::all();
+        return response()->json([
+            "roles"=>$roles
+        ]);
     }
 
     /**
@@ -26,7 +27,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view("students.create");
+        return view("roles.create");
     }
 
     /**
@@ -37,29 +38,10 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = $request->validate(
-            [
-                "name"=>"required",
-                "group_id"=>"required"
-            ]
-        );
-        if($validator){
-            Student::create($request->all());
-            return response()->json([
-                "message"=>"Student was created"
-            ],200);
-        }else{
-            return response()->json([
-                "messages"=>"Validator have reports"
-            ],500);
-        }
-    }
-
-    public function getStudent($request){
-        if($request->get("name")){
-            $student  = Student::where("name","LIKE","%".$request->name."%")->firstOrFailt();
-            return $student;
-        }
+        Roles::create($request->all());
+        return response()->json([
+            "message"=>true
+        ]);
     }
 
     /**
@@ -70,8 +52,7 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        $student = Student::where("id","=",$id)->firstOrFail();
-        return view("students.student")->with("student",$student);
+        //
     }
 
     /**
@@ -82,8 +63,8 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        $student = Student::where("id",$id)->firstOrFail();
-        return view("students.edit")->with("student",$student);
+        $role = Roles::where("id",$id)->firstOrFail();
+        return view("roles.edit")->with("role",$role);
     }
 
     /**
@@ -95,12 +76,18 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $student = Student::where("id",$id)->update($request->all());
-        if($student){
+        $role = Role::where("id",$id)->update([
+
+        ]);
+        if($role){
             return response()->json([
-                "student_info"=>$student
+                "message"=>"Role was saved",
+                "role"=>$role
             ]);
         }
+        return response()->json([
+            "message"=>"Updating failed"
+        ],500);
     }
 
     /**
@@ -111,7 +98,6 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        Student::where("id",$id)->destroy();
-        return true;
+        Roles::where("id",$id)->delete();
     }
 }
