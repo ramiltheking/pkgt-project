@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Group;
 
 class GroupController extends Controller
 {
@@ -23,7 +24,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        //
+        return view("groups.create");
     }
 
     /**
@@ -34,7 +35,15 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $group = Group::create($request->all());
+        if($gorup){
+            return response()->json([
+                "message"=>"Group was created"
+            ]);
+        }
+        return response()->json([
+            "message"=>"Creating error"
+        ],200);
     }
 
     /**
