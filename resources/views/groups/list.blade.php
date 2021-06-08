@@ -9,13 +9,17 @@
         <tr>
             <th>Список групп</th>
 		</tr>
-        @foreach($list as $item)
-		<tr>
-			<td class="group">{{$item->name}}</td>
-		</tr>
-        @endforeach
+        @if(count($list) != 0)
+            @foreach($list as $item)
+            <tr>
+                <td class="group">{{$item->name}}</td>
+            </tr>
+            @endforeach
+        @else
+            <div class="alert alert-danger">Группы не обнаружены</div>
+        @endif
 	</table>
-
+    {{$list->links()}}
 	<div class="buttons">
 		<button type="button" class="btn add btn-success">Добавить группу</button>
 		<button type="button" class="btn filter btn-warning">Фильтровать группу</button>
