@@ -14,10 +14,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view("welcome");
 });
 Auth::routes();
 
-Route::get('/', function(){
-    return view("welcome");
-})->name('home');
+Route::prefix("/groups")->group(
+    function(){
+        Route::get("/list",[\App\Http\Controllers\GroupController::class,"index"]);
+    }
+);
+
+
+//Requests
+
+Route::post("/group",[\App\Http\Controllers\GroupController::class,"store"]);
+Route::delete("/group/{id}",[\App\Http\Controllers\GroupController::class,"destroy"]);

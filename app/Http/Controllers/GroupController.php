@@ -14,7 +14,8 @@ class GroupController extends Controller
      */
     public function index()
     {
-        //
+        $list = Group::paginate(50);
+        return view("groups.list")->with("list",$list);
     }
 
     /**
@@ -35,15 +36,18 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        $group = Group::create($request->all());
-        if($gorup){
+        $group = Group::insert($request->all());
+        if($group){
             return response()->json([
+                "group"=>$request->all(),
                 "message"=>"Group was created"
             ]);
         }
-        return response()->json([
-            "message"=>"Creating error"
-        ],200);
+        else{
+            return response()->json([
+                "message"=>"Creating error"
+            ],200);
+        }
     }
 
     /**
@@ -88,6 +92,6 @@ class GroupController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Group::where("id",$id)->delete();
     }
 }
