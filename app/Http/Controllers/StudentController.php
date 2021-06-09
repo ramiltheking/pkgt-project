@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Group;
 
 class StudentController extends Controller
 {
@@ -13,9 +14,10 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::where("id","=",0)->paginate(30);
+        $group = Group::where("id",$request->get("group"))->select("id","name")->firstOrFail();
+        $students = Student::where("group_id","=",$request->group)->get();
         return view("students.list")->with("sutdents",$students);
     }
 
@@ -37,22 +39,12 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = $request->validate(
-            [
-                "name"=>"required",
-                "group_id"=>"required"
-            ]
-        );
-        if($validator){
-            Student::create($request->all());
-            return response()->json([
-                "message"=>"Student was created"
-            ],200);
-        }else{
-            return response()->json([
-                "messages"=>"Validator have reports"
-            ],500);
-        }
+
+        Student::insert($request->all());
+        return response()->json([
+            "message"=>"Student was created"
+        ],200);
+    
     }
 
     public function getStudent($request){

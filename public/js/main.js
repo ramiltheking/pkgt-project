@@ -28,7 +28,7 @@ $(".add").on("click", function (e) {
 	$(".add-success").removeClass("none");
 })
 
-$(".add-success").on("click", function (e) {
+$(".add-group").on("click", function (e) {
 	e.preventDefault();
 	$(popup).addClass("none");
 	$(overlay).addClass("none");
@@ -121,11 +121,7 @@ $(".save button").on("click", function (e) {
 	let arrJSON = JSON.stringify(array);
 	console.log(arrJSON);
 
-	$.ajaxSetup({
-		headers: {
-			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		}
-	});
+
 
 	$.ajax({
 		url: '...',         /* Куда пойдет запрос */
@@ -168,3 +164,42 @@ function previewFile() {
 }
 
 
+
+
+
+//Students
+
+
+$(".add").on("click", function (e) {
+	e.preventDefault();
+	$(popup).removeClass("none");
+	$(overlay).removeClass("none");
+})
+
+$(".student-add").on("click", function (e) {
+	e.preventDefault();
+	$(popup).addClass("none");
+	$(overlay).addClass("none");
+
+	let text = "" + $("#name").val() + " " + $("#surname").val() + " " + $("#middlename").val();
+	
+	let data = {
+		"name":text,
+		"group_id": $(".group_id").attr("id")
+	}
+	if(data.name != ""){
+		$.ajax({
+			url:"/students",
+			data:data,
+			type:"POST",
+			methods:"POST",
+			success(resp){
+				$("table").append('<tr><td  class="group"><div>' + text + '</div><button type="button" class="btn remove btn-danger">Удалить студента</button></td></tr>');
+				$('.popUp input').val("");
+			}
+		})
+	}
+	else{
+		alert("Заполните все обязательные данные")
+	}
+})

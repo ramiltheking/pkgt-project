@@ -17,7 +17,7 @@
             @foreach($list as $item)
             <tr>
                 <td class="group">
-					{{$item->name}}
+					<a href="/groups/students/list?group={{$item->id}}">{{$item->name}}</a>
 					<button type="button" data-id="{{$item->id}}" class="btn remove remove-group btn-danger"><i class="fas fa-times"></i></button>
 				</td>
             </tr>
@@ -38,7 +38,7 @@
 			<div class="text">Введите сокращенное название группы:</div>
 			<input type="text" name="subname">
 		</div>
-		<button type="button" class="btn add-success none btn-primary">Добавить</button>
+		<button type="button" class="btn add-success add-group none btn-primary">Добавить</button>
 	</div>
 
 	<div class="overlay none"></div>

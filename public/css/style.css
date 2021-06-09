@@ -12,7 +12,13 @@ h1{
 	text-align: center;
 	border-bottom: 1px solid #000;
 }
-
+td a{
+	color: black;
+	text-decoration: none!important;
+}
+td a:hover{
+	text-decoration: underline;
+}
 table{
 	border: 1px solid #eee;
 	table-layout: fixed;
