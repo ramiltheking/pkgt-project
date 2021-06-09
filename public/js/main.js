@@ -83,3 +83,71 @@ $(document).ready(function () {
 		});
 	});
 });
+
+
+/* Координаты */
+
+$(".abs").draggable();
+
+function editor() {
+	$(".edit").on("click", function () {
+		let w = prompt("Введите ширину") + "px";
+		let h = prompt("Введите высоту") + "px";
+
+		let sibl = $(this).siblings(".btn");
+		sibl.css("width", w);
+		sibl.css("height", h);
+	})
+}
+
+for (let c = 0, dist = 20; c < $(".abs").length; c++, dist += 240) {
+	($(".abs")[c]).style.left = dist + "px"; // Удобное расположение элементов
+}
+
+$(".save button").on("click", function (e) {
+	e.preventDefault();
+	let inputs = $(".abs");
+	let array = [];
+	for (let i = 0, id = 0; i < inputs.length; i++, id++) {
+		let nameofObj = inputs[i].querySelector('.name').value;
+		let obj = {
+			id: id,
+			name: nameofObj,
+			x: inputs[i].offsetLeft,
+			y: inputs[i].offsetTop,
+		}
+		array.push(obj);
+	}
+	let arrJSON = JSON.stringify(array);
+	console.log(arrJSON);
+
+	$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
+
+	$.ajax({
+		url: '...',         /* Куда пойдет запрос */
+		method: 'get',
+		dataType: 'json',
+		data: arrJSON,
+		success: function (data) {
+			console.log(data);
+		}
+	});
+})
+
+$("#add").on("click", function (e) {
+	e.preventDefault();
+	$(".addInputs").append('<div class="abs"><input class="btn  btn-outline-primary"><input class="name" maxlength="15" type="text"><div class="edit btn-warning"></div></div>');
+	$(".abs").draggable();
+
+	editor();
+})
+
+
+
+editor();
+
+
