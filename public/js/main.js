@@ -46,8 +46,8 @@ $(".add-success").on("click", function (e) {
 			type:"POST",
 			methods:"POST",
 			success(resp){
-				console.log(resp)
 				$(".groups_list tr:last-of-type").after(`<tr><td class="group">${resp.group.name}</td></tr>`)
+				$("#myInput").val("")
 			}
 		})
 	}else{
@@ -57,33 +57,29 @@ $(".add-success").on("click", function (e) {
 	$('.popUp input').val("");
 })
 
-/* ======================================== */
-/*  Удаление */
-$(".remove").on("click", function (e) {
+
+
+$(".remove-group").on("click", function (e) {
 	e.preventDefault();
-
-	$(popup).removeClass("none");
-	$(overlay).removeClass("none");
-	$(".btn-remove").removeClass("none");
-})
-
-$(".btn-remove").on("click", function (e) {
-	e.preventDefault();
-
-	let arr = $(".group");
-	let text = $(".popUp input").val();
-	for (let i = 0; i < arr.length; i++) {
-		let td = $(arr[i]).text();
-		if (text == td) {
-			console.log($($(arr[i]).parent()).remove());
+	let id = $(this).attr("data-id")
+	$(this).parent().remove();
+	$.ajax({
+		url:"/group/"+id,
+		type:"delete",
+		methods:"delete",
+		success(e){
+			console.info("Group was deleted")
 		}
-	}
-
-	$('.popUp input').val("");
-	$(popup).addClass("none");
-	$(overlay).addClass("none");
-	$(".btn-remove").addClass("none");
-	
+	})
 })
 
 /* ======================================== */
+
+$(document).ready(function () {
+	$("#myInput").on("keyup", function () {
+		var value = $(this).val().toLowerCase();
+		$("table tr").filter(function () {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
+	});
+});

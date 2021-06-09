@@ -14,7 +14,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $list = Group::paginate(50);
+        $list = Group::all();
         return view("groups.list")->with("list",$list);
     }
 

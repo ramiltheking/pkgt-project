@@ -30,28 +30,38 @@ table th {
 }
 
 table td{
-	padding: 5px 10px;
+	padding: 10px 10px;
 	border: 1px solid #eee;
 	text-align: center;
+	position: relative;
 }
 
-table tbody tr:nth-child(odd){
-	background: #fff;
+
+.btn-danger{
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	padding: 0.175rem .75rem !important;
 }
 
-table tbody tr:nth-child(even){
+
+table tbody tr{
 	background: #F7F7F7;
 }
 
 .buttons{
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
+	margin: 10px auto;
+	width: 70%;
 }
 
-.buttons button{
-	margin: 0 20px;
+.buttons #myInput{
+	width: 80%;
 }
+
 
 .popUp{
 	display: flex;
