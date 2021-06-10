@@ -31,7 +31,7 @@ Route::prefix("/groups")->group(
 
 
 //Requests
-Route::post("/students",[\App\Http\Controllers\StudentController::class,"store"])
+Route::post("/students",[\App\Http\Controllers\StudentController::class,"store"]);
 Route::post("/group",[\App\Http\Controllers\GroupController::class,"store"]);
 Route::delete("/group/{id}",[\App\Http\Controllers\GroupController::class,"destroy"]);
 
