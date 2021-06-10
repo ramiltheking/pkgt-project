@@ -167,6 +167,10 @@ body{
 	border-radius: 50%;
 	cursor: grab;
  }
+
+ .none--after::after{
+	 display: none;
+ }
  
  .edit{
 	position: absolute;
@@ -181,7 +185,13 @@ body{
 	 margin: 0 10px;
  }
  
- 
+ .text{
+	position: absolute;
+	line-height: 38px;
+	width: 195px;
+	height: 38px;
+	text-align: center;
+}
  
  
 

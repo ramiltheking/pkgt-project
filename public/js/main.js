@@ -119,8 +119,6 @@ $(".save button").on("click", function (e) {
 		array.push(obj);
 	}
 	let arrJSON = JSON.stringify(array);
-	console.log(arrJSON);
-
 
 
 	$.ajax({
@@ -136,7 +134,7 @@ $(".save button").on("click", function (e) {
 
 $("#add").on("click", function (e) {
 	e.preventDefault();
-	$(".addInputs").append('<div class="abs"><input class="btn  btn-outline-primary"><input class="name" maxlength="15" type="text"><div class="edit btn-warning"></div></div>');
+	$(".addInputs").append('<div class="abs"><div class="text"></div><div class="inputs--area"><input class="btn  btn-outline-primary"><input class="name" maxlength="15" type="text"><div class="edit btn-warning"></div></div></div>');
 	$(".abs").draggable();
 
 	editor();
@@ -156,8 +154,27 @@ $("#edit--close").on("click", function (e) {
 	$(".name").addClass("none");
 })
 
-$("#preview").on("click", function (e) {
+$("#preview").on("mousedown", function (e) {
 	e.preventDefault();
+	let array = $(".text");
+
+	$(".inputs--area").addClass("none");
+	$(".abs").addClass("none--after");
+	$(".text").removeClass("none");
+
+	for (let k = 0; k < array.length; k++) {
+		let word = $($(".btn-outline-primary")[k]).val();
+		$(array[k]).text(word);
+	}
+})
+
+
+$("#preview").on("mouseup", function (e) {
+	e.preventDefault();
+
+	$(".inputs--area").removeClass("none");
+	$(".abs").removeClass("none--after");
+	$(".text").addClass("none");
 
 })
 
