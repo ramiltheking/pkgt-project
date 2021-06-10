@@ -2,7 +2,7 @@
 
 @section("title","Главная")
 @section("content")
-
+<!--
 <h1>Загрузите документ</h1>
 <div class="download">
 	<div class="download--zone">
@@ -14,13 +14,20 @@
 	</div>
 </div>
 
+-->
 
-<!--
 <div class="addInputs">
 		<button id="add" type="button" class="btn btn-primary">Добавить кнопку</button>
+
+		<button id="edit--open" type="button" class="btn btn-primary">Показать названия</button>
+		<button id="edit--close" type="button" class="btn btn-primary">Скрыть названия</button>
+
+		<button id="preview" type="button" class="btn  btn-danger">Предпосмотр</button>
+
 		<div class="edit edit-tp btn-warning"></div>Редактирование
 		<div class="edit edit-tp btn-primary"></div> Перемещение
 	</div>
+
 
 	<div class="inputs">
 		<div class="abs">
@@ -48,6 +55,6 @@
 	<div class="save">
 		<button class="btn btn-success">Сохранить</button>
 	</div>
--->
+
 
 @endsection

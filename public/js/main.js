@@ -1,14 +1,14 @@
 let popup = $(".popUp");
 let overlay = $(".overlay");
 
-function valueByName(name){
+function valueByName(name) {
 	return $(`input[name="${name}"]`).val()
 }
 
 $.ajaxSetup(
 	{
 		headers: {
-			"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")
+			"X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
 		}
 	}
 )
@@ -39,18 +39,18 @@ $(".add-group").on("click", function (e) {
 		name: valueByName("name"),
 		slim_name: valueByName("subname")
 	}
-	if(data.name != "" && data.name != null){
+	if (data.name != "" && data.name != null) {
 		$.ajax({
-			url:"/group",
-			data:data,
-			type:"POST",
-			methods:"POST",
-			success(resp){
+			url: "/group",
+			data: data,
+			type: "POST",
+			methods: "POST",
+			success(resp) {
 				$(".groups_list tr:last-of-type").after(`<tr><td class="group">${resp.group.name}</td></tr>`)
 				$("#myInput").val("")
 			}
 		})
-	}else{
+	} else {
 		alert("Заполнены не все обязательные данные")
 		return false;
 	}
@@ -64,10 +64,10 @@ $(".remove-group").on("click", function (e) {
 	let id = $(this).attr("data-id")
 	$(this).parent().remove();
 	$.ajax({
-		url:"/group/"+id,
-		type:"delete",
-		methods:"delete",
-		success(e){
+		url: "/group/" + id,
+		type: "delete",
+		methods: "delete",
+		success(e) {
 			console.info("Group was deleted")
 		}
 	})
@@ -146,6 +146,21 @@ $("#add").on("click", function (e) {
 
 editor();
 
+$("#edit--open").on("click", function (e) {
+	e.preventDefault();
+	$(".name").removeClass("none");
+})
+
+$("#edit--close").on("click", function (e) {
+	e.preventDefault();
+	$(".name").addClass("none");
+})
+
+$("#preview").on("click", function (e) {
+	e.preventDefault();
+
+})
+
 /* Прелоадер картинки */
 function previewFile() {
 	var preview = document.querySelector('img');
@@ -182,24 +197,26 @@ $(".student-add").on("click", function (e) {
 	$(overlay).addClass("none");
 
 	let text = "" + $("#name").val() + " " + $("#surname").val() + " " + $("#middlename").val();
-	
+
 	let data = {
-		"name":text,
+		"name": text,
 		"group_id": $(".group_id").attr("id")
 	}
-	if(data.name != ""){
+	if (data.name != "") {
 		$.ajax({
-			url:"/students",
-			data:data,
-			type:"POST",
-			methods:"POST",
-			success(resp){
+			url: "/students",
+			data: data,
+			type: "POST",
+			methods: "POST",
+			success(resp) {
 				$("table").append('<tr><td  class="group"><div>' + text + '</div><button type="button" class="btn remove btn-danger">Удалить студента</button></td></tr>');
 				$('.popUp input').val("");
 			}
 		})
 	}
-	else{
+	else {
 		alert("Заполните все обязательные данные")
 	}
 })
+
+
