@@ -97,6 +97,8 @@ function editor() {
 		let sibl = $(this).siblings(".btn");
 		sibl.css("width", w);
 		sibl.css("height", h);
+		$($($(this).parent()).siblings(".text")).css("width", w);
+		$($($(this).parent()).siblings(".text")).css("height", h);
 	})
 }
 
@@ -120,16 +122,16 @@ $(".save button").on("click", function (e) {
 	}
 	let arrJSON = JSON.stringify(array);
 
-
-	$.ajax({
-		url: '...',         /* Куда пойдет запрос */
-		method: 'get',
-		dataType: 'json',
-		data: arrJSON,
-		success: function (data) {
-			console.log(data);
-		}
-	});
+	/*
+		$.ajax({
+			url: '...',         /* Куда пойдет запрос 
+			method: 'get',
+			dataType: 'json',
+			data: arrJSON,
+			success: function (data) {
+				console.log(data);
+			}
+		});*/
 })
 
 $("#add").on("click", function (e) {
@@ -161,6 +163,7 @@ $("#preview").on("mousedown", function (e) {
 	$(".inputs--area").addClass("none");
 	$(".abs").addClass("none--after");
 	$(".text").removeClass("none");
+	$(".text").css("z-index", "15");
 
 	for (let k = 0; k < array.length; k++) {
 		let word = $($(".btn-outline-primary")[k]).val();
@@ -175,7 +178,7 @@ $("#preview").on("mouseup", function (e) {
 	$(".inputs--area").removeClass("none");
 	$(".abs").removeClass("none--after");
 	$(".text").addClass("none");
-
+	$(".text").css("z-index", "-1");
 })
 
 /* Прелоадер картинки */
@@ -195,6 +198,45 @@ function previewFile() {
 	}
 }
 
+/* Сохранение картинки в word */
+function genScreenshot() {
+	html2canvas(document.querySelector(".download--image img")).then(function (canvas) {
+
+		let my_screen = canvas;
+
+		document.querySelector(".box").appendChild(my_screen);
+
+	});
+	/*
+	html2canvas(document.body, {
+		onrendered: function (canvas) {
+			$('#box1').html("");
+			$('#box1').append(canvas);
+
+			$('.save--image').attr('href', canvas.toDataURL("image/png"));
+			$('.save--image').attr('download', 'Test file.png');
+			$('.save--image')[0].click();
+			
+			if (navigator.userAgent.indexOf("MSIE ") > 0 ||
+				navigator.userAgent.match(/Trident.*rv\:11\./)) {
+				var blob = canvas.msToBlob();
+				window.navigator.msSaveBlob(blob, 'Test file.png');
+			}
+			else {
+				$('.save--image').attr('href', canvas.toDataURL("image/png"));
+				$('.save--image').attr('download', 'Test file.png');
+				$('.save--image')[0].click();
+			}
+
+
+}
+	});*/
+}
+
+$(".save--image").on("click", function (e) {
+	e.preventDefault();
+	genScreenshot();
+})
 
 
 
