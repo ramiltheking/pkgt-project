@@ -19,6 +19,9 @@
     <script src="{{asset('js/jquery.min.js')}}"></script>
     <script src="{{asset('js/jquery-ui.min.js')}}"></script>
 	 <script src="{{asset('js/html2canvas.js')}}"></script>
+	 <script src="{{asset('js/jspdf.min.js')}}"></script>
     <script src="{{asset('js/main.js')}}"></script>
+	 
+	 
 </body>
 </html>

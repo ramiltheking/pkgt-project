@@ -208,12 +208,13 @@ body{
  .download--zone{
 	display: flex;
 	align-items: center;
+	justify-content: space-around;
  }
 
  .download--image{
 	 margin-top: 50px;
  }
- 
+
  
  
  

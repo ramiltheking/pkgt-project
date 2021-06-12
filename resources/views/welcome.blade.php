@@ -54,12 +54,22 @@
 
 	</div>
 
+
+
 	<div class="download">
 	<div class="download--zone">
-		<input type="file" id="profile_pic" name="profile_pic" accept=".jpg, .jpeg, .png" onchange="previewFile()"><br>
+		<input type="file" id="profile_pic" name="profile_pic"  accept=".jpg, .jpeg, .png" onchange="previewFile()"><br>
+
+		<div class="save">
+		<button class="btn save--image btn-success">Сохранить</button>
+		<div class="box"></div>
 	</div>
+
+	</div>
+
+	
 	<div class="download--image">
-		<img src="" height="" alt="Image preview..." download>
+		<img src="" alt="Image preview..." style="width: 100%;">
 	</div>
 </div>
 
@@ -68,10 +78,25 @@
 		<img src='https://i.postimg.cc/TYj2mm0K/39443-html-30da2d66.jpg' border='0' alt='39443-html-30da2d66' />
 	</div>
 	-->
-	<div class="save">
-		<button class="btn save--image btn-success">Сохранить</button>
-		<div class="box"></div>
-	</div>
+	
 
+	<script type="module">  
+			document.querySelector(".save--image").addEventListener("click", function(e){
+				e.preventDefault();
+				const { jsPDF } = window.jspdf;
+				const doc = new jsPDF();
+				
+				html2canvas(document.querySelector(".download--image")).then(function(canvas) {		
+					let my_screen = canvas;	
 
+					let w = parseInt(canvas.style.width, 10);
+					let h = parseInt(canvas.style.height, 10);
+
+					doc.addImage(my_screen, "JPEG", 25, 15, 180, 180);		
+					doc.save("a4.pdf");
+				});	
+				
+				
+			})  			
+	</script>
 @endsection

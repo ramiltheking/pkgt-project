@@ -17,5 +17,8 @@
         "lodash": "^4.17.19",
         "popper.js": "^1.12",
         "postcss": "^8.1.14"
+    },
+    "dependencies": {
+        "pdfmake": "^0.1.71"
     }
 }
