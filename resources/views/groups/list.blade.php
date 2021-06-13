@@ -17,13 +17,15 @@
             @foreach($list as $item)
             <tr>
                 <td class="group">
-					<a href="/groups/students/list?group={{$item->id}}">{{$item->name}}</a>
+					<a href="/students/list?group={{$item->id}}">{{$item->name}}</a>
 					<button type="button" data-id="{{$item->id}}" class="btn remove remove-group btn-danger"><i class="fas fa-times"></i></button>
 				</td>
             </tr>
             @endforeach
         @else
-            <div class="alert alert-danger">Группы не обнаружены</div>
+            <div class="my-2 container">
+				<div class="alert alert-danger">Группы не обнаружены</div>
+			</div>
         @endif
 	</table>
 

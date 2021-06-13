@@ -16,9 +16,13 @@ class StudentController extends Controller
      */
     public function index(Request $request)
     {
+        
         $group = Group::where("id",$request->get("group"))->select("id","name")->firstOrFail();
         $students = Student::where("group_id","=",$request->group)->get();
-        return view("students.list")->with("sutdents",$students);
+        return view("students.list",[
+            "group"=>$group,
+            "students"=>$students
+        ]);
     }
 
     /**

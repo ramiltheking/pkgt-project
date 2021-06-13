@@ -197,8 +197,37 @@ $(".save--image").on("click", function (e) {
 })
 
 
-
-
+//Lessons
+$(".add-lesson").click(
+	function(e){
+		e.preventDefault()
+		let name = $(`input[name="name"]`).val()
+		$.ajax({
+			url:"/lessons/add",
+			type:"POST",
+			method: "POST",
+			data:{
+				"name":name
+			},
+			success(answ){
+				$("table tr:last-child").after(`<tr><td>${name}</td><td>${answ.id}</td></tr>`)
+			}
+		})
+	}
+)
+$(".delete-lesson").click(
+	function(e){
+		let id = e.target.attr("id")
+		$.ajax({
+			url:"/lessons/delete/"+id,
+			type:"delete",
+			method: "delete",
+			success(answ){
+			}
+		})
+		$(this).parent().parent().remove()
+	}
+)
 //Students
 
 

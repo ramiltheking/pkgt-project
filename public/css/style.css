@@ -26,7 +26,10 @@ table{
 	margin: 0 auto;
 	margin-bottom: 20px;
 }
-
+.form-group{
+	display: flex;
+	flex-direction: column;
+}
 table th {
 	font-weight: bold;
 	padding: 5px;

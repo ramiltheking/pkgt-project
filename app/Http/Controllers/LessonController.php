@@ -15,9 +15,7 @@ class LessonController extends Controller
     public function index()
     {
         $lessons = Lesson::all();
-        return response()->json([
-            "lessons"=>$lessons
-        ]);
+        return view("lessons.list")->with("lessons",$lessons);
     }
 
     /**
@@ -38,9 +36,10 @@ class LessonController extends Controller
      */
     public function store(Request $request)
     {
-        Lesson::create($request->all());
+        $lesson = Lesson::create($request->all());
         return response()->json([
-            "message"=>"Lesson was created"
+            "message"=>"Lesson was created",
+            "id"=>$lesson->id
         ]);
     }
 

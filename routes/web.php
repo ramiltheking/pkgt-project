@@ -13,25 +13,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view("welcome");
-});
+
 Auth::routes();
 
-Route::prefix("/groups")->group(
+Route::middleware(["auth"])->group(
     function(){
-        Route::get("/list",[\App\Http\Controllers\GroupController::class,"index"]);
+        //Requests
+        Route::get('/', function () {
+            return view("welcome");
+        });
+        Route::post("/students",[\App\Http\Controllers\StudentController::class,"store"]);
+        Route::post("/group",[\App\Http\Controllers\GroupController::class,"store"]);
+        Route::delete("/group/{id}",[\App\Http\Controllers\GroupController::class,"destroy"]);
         Route::prefix("students")->group(
             function(){
                 Route::get("/list",[\App\Http\Controllers\StudentController::class,"index"]);
+            }
+        );
+        Route::prefix("lessons")->group(
+            function(){
+                Route::get("/list",[\App\Http\Controllers\LessonController::class,"index"]);
+                Route::get("/add",[\App\Http\Controllers\LessonController::class,"store"]);
+                Route::delete("/delete/{id}",[\App\Http\Controllers\LessonController::class,"destroy"]);
+            }
+        );
+        Route::prefix("/groups")->group(
+            function(){
+                Route::get("/list",[\App\Http\Controllers\GroupController::class,"index"]);
             }
         );
     }
 );
 
 
-//Requests
-Route::post("/students",[\App\Http\Controllers\StudentController::class,"store"]);
-Route::post("/group",[\App\Http\Controllers\GroupController::class,"store"]);
-Route::delete("/group/{id}",[\App\Http\Controllers\GroupController::class,"destroy"]);
 
