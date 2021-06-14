@@ -71,7 +71,8 @@
 		document.querySelector(".save--image").addEventListener("click", function(e){
 			e.preventDefault();
 			const { jsPDF } = window.jspdf;
-			const doc = new jsPDF();
+			/*const doc = new jsPDF('p', 'mm', [297, 210]);*/
+			const doc = new jsPDF('p', 'pt','a4',true);
 			
 			html2canvas(document.querySelector(".download--image")).then(function(canvas) {		
 				let my_screen = canvas;	
@@ -79,11 +80,9 @@
 				let w = parseInt(canvas.style.width, 10);
 				let h = parseInt(canvas.style.height, 10);
 
-				doc.addImage(my_screen, "JPEG", 25, 15, 180, 180);		
+				doc.addImage(my_screen, "PNG", 25, 15, 500, 419);		
 				doc.save("a4.pdf");
-			});	
-			
-			
+			});			
 		})  			
 </script>
 
