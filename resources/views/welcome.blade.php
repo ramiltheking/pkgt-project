@@ -4,10 +4,6 @@
 @section("content")
 
 
-
-
-
-
 <div class="addInputs">
 		<button id="add" type="button" class="btn btn-primary">Добавить кнопку</button>
 
@@ -20,8 +16,6 @@
 		<div class="edit edit-tp btn-primary"></div> Перемещение
 	</div>
 
-
-	
 
 
 	<div class="download">
@@ -38,7 +32,7 @@
 	
 	<div class="download--image">
 		<img src="" alt="Image preview..." style="width: 100%;">
-        <div class="inputs">
+		<div class="inputs">
 		<div class="abs">
 			<div class="text"></div>
 
@@ -70,34 +64,28 @@
 		</div>
 
 	</div>
-
 	</div>
 </div>
 
-	<!--
-	<div class="drag">
-		<img src='https://i.postimg.cc/TYj2mm0K/39443-html-30da2d66.jpg' border='0' alt='39443-html-30da2d66' />
-	</div>
-	-->
-	
+<script type="module">  
+		document.querySelector(".save--image").addEventListener("click", function(e){
+			e.preventDefault();
+			const { jsPDF } = window.jspdf;
+			const doc = new jsPDF();
+			
+			html2canvas(document.querySelector(".download--image")).then(function(canvas) {		
+				let my_screen = canvas;	
 
-	<script type="module">  
-			document.querySelector(".save--image").addEventListener("click", function(e){
-				e.preventDefault();
-				const { jsPDF } = window.jspdf;
-				const doc = new jsPDF();
-				
-				html2canvas(document.querySelector(".download--image")).then(function(canvas) {		
-					let my_screen = canvas;	
+				let w = parseInt(canvas.style.width, 10);
+				let h = parseInt(canvas.style.height, 10);
 
-					let w = parseInt(canvas.style.width, 10);
-					let h = parseInt(canvas.style.height, 10);
+				doc.addImage(my_screen, "JPEG", 25, 15, 180, 180);		
+				doc.save("a4.pdf");
+			});	
+			
+			
+		})  			
+</script>
 
-					doc.addImage(my_screen, "JPEG", 25, 15, 180, 180);		
-					doc.save("a4.pdf");
-				});	
-				
-				
-			})  			
-	</script>
+
 @endsection
