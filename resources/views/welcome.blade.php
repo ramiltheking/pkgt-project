@@ -21,7 +21,24 @@
 	</div>
 
 
-	<div class="inputs">
+	
+
+
+	<div class="download">
+	<div class="download--zone">
+		<input type="file" id="profile_pic" name="profile_pic"  accept=".jpg, .jpeg, .png" onchange="previewFile()"><br>
+
+		<div class="save">
+		<button class="btn save--image btn-success">Сохранить</button>
+		<div class="box"></div>
+	</div>
+
+	</div>
+
+	
+	<div class="download--image">
+		<img src="" alt="Image preview..." style="width: 100%;">
+        <div class="inputs">
 		<div class="abs">
 			<div class="text"></div>
 
@@ -54,22 +71,6 @@
 
 	</div>
 
-
-
-	<div class="download">
-	<div class="download--zone">
-		<input type="file" id="profile_pic" name="profile_pic"  accept=".jpg, .jpeg, .png" onchange="previewFile()"><br>
-
-		<div class="save">
-		<button class="btn save--image btn-success">Сохранить</button>
-		<div class="box"></div>
-	</div>
-
-	</div>
-
-	
-	<div class="download--image">
-		<img src="" alt="Image preview..." style="width: 100%;">
 	</div>
 </div>
 
