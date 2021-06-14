@@ -122,6 +122,7 @@ body{
 	margin: 20px;
 	display: flex;
 	align-items: center;
+    margin-bottom: 160px;
  }
  
  .addInputs .edit-tp{
