@@ -17,7 +17,7 @@
 	</div>
 
 
-    <div>Чтобы сохранить без обрезки, долистайте документ до начала</div>
+    <div>Чтобы сохранить без обрезки, долистайте страницу до начала</div>
 	<div class="download">
 	<div class="download--zone">
 		<input type="file" id="profile_pic" name="profile_pic"  accept=".jpg, .jpeg, .png" onchange="previewFile()"><br>
